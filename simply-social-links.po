@@ -1,0 +1,79 @@
+# Copyright (C) 2010 Simply Social Links
+# This file is distributed under the same license as the Simply Social Links package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simply Social Links 0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/simply-social-links\n"
+"POT-Creation-Date: 2011-05-10 05:45:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2011-05-10 02:49-0300\n"
+"Last-Translator: Matheus Eduardo <matheuseduardo.com@gmail.com>\n"
+"Language-Team: \n"
+
+#: social-links.php:16
+#: simply-social-links.php:182
+msgid "Add"
+msgstr ""
+
+#: social-links.php:17
+msgid "Example: <code>http://wordpress.org/</code> &#8212; don&#8217;t forget the <code>http://</code>"
+msgstr ""
+
+#: social-links.php:24
+#: simply-social-links.php:181
+msgid "List"
+msgstr "Lista"
+
+#: social-links.php:37
+#: simply-social-links.php:183
+msgid "Delete"
+msgstr "Excluir"
+
+#: social-links.php:45
+msgid "You need to save this link to add social network links in it. Or try editing another."
+msgstr "Você precisa salvar este link para adicionar links de redes sociais nele. Ou tente editando um outro."
+
+#: simply-social-links.php:138
+msgid "Social Networks Links"
+msgstr "Links de Redes Sociais"
+
+#: simply-social-links.php:154
+msgid "Settings"
+msgstr "Configurações"
+
+#: simply-social-links.php:179
+#: simply-social-links.php:204
+msgid "Link successfully added."
+msgstr "Link adicionado com sucesso."
+
+#: simply-social-links.php:180
+#: simply-social-links.php:221
+msgid "Link successfully deleted."
+msgstr "Link excluído com sucesso."
+
+#: simply-social-links.php:184
+msgid "Error"
+msgstr "Erro"
+
+#. Plugin Name of the plugin/theme
+msgid "Simply Social Links"
+msgstr "Simply Social Links"
+
+#. Plugin URI of the plugin/theme
+msgid "http://maathe.us/blog/simply-social-widgets"
+msgstr "http://maathe.us/blog/simply-social-widgets"
+
+#. Description of the plugin/theme
+msgid "A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!). <br> Uma forma ~simples~ de adicionar informações aos links (bookmarks?!), como: twitter, tumblr, last.fm, facebook, flickr, orkut, etc. Ainda testando."
+msgstr " Uma forma ~simples~ de adicionar informações aos links (bookmarks?!), como: twitter, tumblr, last.fm, facebook, flickr, orkut, etc. Ainda testando."
+
+#. Author of the plugin/theme
+msgid "Matheus Eduardo (@matheuseduardo)"
+msgstr "Matheus Eduardo (@matheuseduardo)"
+
+#. Author URI of the plugin/theme
+msgid "http://maathe.us/blog"
+msgstr "http://maathe.us/blog"
+
