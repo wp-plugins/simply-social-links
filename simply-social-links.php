@@ -3,7 +3,7 @@
 Plugin Name: Simply Social Links
 Plugin URI: http://maathe.us/blog/simply-social-widgets
 Description: A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!). <br> Uma forma ~simples~ de adicionar informações aos links (bookmarks?!), como: twitter, tumblr, last.fm, facebook, flickr, orkut, etc. Ainda testando.
-Version: 0.5
+Version: 0.1
 Author: Matheus Eduardo (@matheuseduardo)
 Author URI: http://maathe.us/blog
 Donate URI: http://maathe.us/blog/pague-me-um-cafe
