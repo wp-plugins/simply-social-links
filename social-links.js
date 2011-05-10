@@ -36,7 +36,7 @@ function ssl_add_link() {
 		data: data
 	})
 	.success(function(a) {
-		var botao_apagar = "<a href=\"javascript:void(0);\" class=\"button-secondary hide-if-no-js \" onclick=\"ssl_delete_link(event, '" + lind_id + "','{$link->link_id}')\">" . __('Delete','simply-social-links') . "</a>"
+		var botao_apagar = "<a href=\"javascript:void(0);\" class=\"button-secondary hide-if-no-js \" onclick=\"ssl_delete_link(event, '" + link_id + "','{$link->link_id}')\">" + SocialLinks.delete + "</a>"
 		
 		
 		var el = '<dt class="' + site + '"></dt><dd>' + url + '</dd>';
@@ -49,9 +49,9 @@ function ssl_add_link() {
 		
 	})
 	.error(function(c, d) {
-		alert("Erro: " + c.status + " - " + c.statusText);
+		alert(SocialLinks.error + ": " + c.status + " - " + c.statusText);
 	})
-	.complete(function(e, f) {
+	.complete(function(e) {
 		jQuery('select#ssl_network_site, input#ssl_network_url').attr('disabled','');
 	});
 	

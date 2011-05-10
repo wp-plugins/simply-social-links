@@ -141,6 +141,7 @@ class simplySocialLinks {
 	
 	public static function social_links_admin_scripts() {
 		wp_enqueue_script('social_links_js', simplySocialLinks::$PLUGIN_PATH . 'social-links.js', array('jquery'), '0.1', false);
+		wp_localize_script('social_links_js', 'SocialLinks', simplySocialLinks::js_localize_vars());
 		
 	}
 	public static function social_links_admin_styles() {
@@ -172,8 +173,16 @@ class simplySocialLinks {
 	
 	
 	
-	public static function social_links_javascript() {
-		
+	public static function js_localize_vars() {
+		return array(
+			'SiteUrl' => get_bloginfo('url'),
+			'successfully_added' => __('Link successfully added.','simply-social-links'),
+			'successfully_deleted' => __('Link successfully deleted.','simply-social-links'),
+			'list' => __('List','simply-social-links'),
+			'add' => __('Add','simply-social-links'),
+			'delete' => __('Delete','simply-social-links'),
+			'error' => __('Error','simply-social-links')
+		);
 	}
 	
 	public static function add_social_network_link() {
