@@ -5,7 +5,7 @@ Tags: simple, links, social, network,
 Requires at least: 3.0
 Tested up to: 3.1.2
 Stable tag: 0.1
-A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!). Uma forma ~simples~ de adicionar informações aos links (bookmarks?!), como: twitter, tumblr, last.fm, facebook, flickr, orkut, etc. Ainda testando.
+A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!).
 
 
 == Description ==
