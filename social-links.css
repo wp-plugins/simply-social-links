@@ -1,0 +1,38 @@
+.social_links select {
+	width: 15%;
+}
+
+.social_links input#ssl_network_url {
+	background-image: url("images/social-icons-sprite.gif");
+	background-repeat: no-repeat;
+	padding-left: 21px;
+	width:63%;
+}
+.social_links a.incluir { display: inline-block; width: 12% !important; text-align: center; }
+
+.social_links  h4 {
+	margin-bottom: 0.5em;
+}
+
+.social_links dl dt {
+	float: left;
+	background-image: url("images/social-icons-sprite.gif");
+	background-repeat: no-repeat;
+	padding-left: 21px;
+	min-height: 21px;
+}
+
+.social_links dl dd {
+	line-height: 21px;
+	margin-left: 25px;
+	width: auto;
+}
+
+input#ssl_network_url.twitter, .social_links dl dt.twitter  { background-position: 3px    3px }
+input#ssl_network_url.flickr, .social_links dl dt.flickr   { background-position: 3px  -21px }
+input#ssl_network_url.tumblr, .social_links dl dt.tumblr   { background-position: 3px  -45px }
+input#ssl_network_url.lastfm, .social_links dl dt.lastfm   { background-position: 3px  -69px }
+input#ssl_network_url.facebook, .social_links dl dt.facebook { background-position: 3px  -93px }
+input#ssl_network_url.plurk, .social_links dl dt.plurk    { background-position: 3px -117px }
+input#ssl_network_url.orkut, .social_links dl dt.orkut    { background-position: 3px -141px }
+
