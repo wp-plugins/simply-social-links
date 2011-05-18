@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: Simply Social Links
-Plugin URI: http://maathe.us/blog/simply-social-widgets
-Description: A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!). <br> Uma forma ~simples~ de adicionar informações aos links (bookmarks?!), como: twitter, tumblr, last.fm, facebook, flickr, orkut, etc. Ainda testando.
-Version: 0.5
+Plugin URI: http://maathe.us/blog/simply-social-links
+Description: A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!).
+Version: 0.6
 Author: Matheus Eduardo (@matheuseduardo)
 Author URI: http://maathe.us/blog
 Donate URI: http://maathe.us/blog/pague-me-um-cafe
-Last change: 04/05/2011
+Last change: 05/18/2011
 Licence: GPL
 */
 
@@ -63,7 +63,7 @@ class simplySocialLinks {
 		
 		$wpdb->linkmeta = $wpdb->prefix . 'linkmeta';
 		$wpdb->tables = array_merge($wpdb->tables, array('linkmeta'));
-		simplySocialLinks::$PLUGIN_PATH = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+		
 		
 		define('SSL_BASENAME', plugin_basename(__FILE__));
 		define('SSL_BASEDIR', dirname( plugin_basename(__FILE__)));
@@ -98,6 +98,8 @@ class simplySocialLinks {
 		
 		error_reporting(E_ALL ^ E_NOTICE);
 		
+		simplySocialLinks::$PLUGIN_PATH = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+		
 		global $wpdb;
 		$wpdb->linkmeta = $wpdb->prefix . 'linkmeta';
 		$wpdb->tables = array_merge($wpdb->tables, array('linkmeta'));
@@ -130,6 +132,14 @@ class simplySocialLinks {
 			}
 		}
 		
+		
+		//add_filter('link_url',array('simplySocialLinks', 'link_after_filter'));
+		add_filter('link_after', array('simplySocialLinks', 'link_after_filter'), 10, 2);
+		
+		//global $wp_filter;
+		//$x = has_filter('wp_list_bookmarks');
+		//echo '<pre>';print_r($wp_filter); exit;
+		
 		error_reporting(0);
 	}
 	
@@ -151,7 +161,7 @@ class simplySocialLinks {
 	public static function add_settings_link( $links, $file ) {
 		array_unshift(
 			$links,
-			sprintf( '<a id="simply-social-links" href="javascript:void(0)" title="Configure this plugin">%s</a>', __('Settings') )
+			sprintf( '<a id="simply-social-links" href="javascript:alert(\'Not working *yet*\');void(0)" title="Configure this plugin">%s</a>', __('Settings') )
 		);
 		
 		return $links;
@@ -168,9 +178,57 @@ class simplySocialLinks {
 	}
 	
 	
+	public static function link_after_filter($output, $bookmark) {
+		error_reporting(E_ALL);
+		//echo "\r\n--output--\r\n";  print_r($output); echo "\r\n--bookmark--\r\n"; print_r($bookmark);echo "\r\n--fim--";
+		
+		$options = get_option('simplysociallink-options');
+		
+		if (!isset($options['theme'])) {
+			$themefolder = simplySocialLinks::$PLUGIN_PATH . "themes/default/";
+		}
+		else {
+			$themefolder = simplySocialLinks::$PLUGIN_PATH . "themes/" . $options['theme'] . "/";
+		}
+		
+		$links = '<span class="ss-links">';
+		foreach (simplySocialLinks::get_social_links($bookmark->link_id) as $sociallink):
+			$links .= ' <a href="' . $sociallink['url'] . '" class="ssl_'. $sociallink['network'] .'" target="_blank"><img src="' . $themefolder. $sociallink['network'] . '.gif" class="" /></a>';
+		endforeach;
+		$links .= '</span>';
+		
+		return $output . $links;
+	}
 	
 	
 	
+	public static function get_social_links($link_id) {
+		global $wpdb;
+		$retorno = array();
+		
+		$resultado = $wpdb->get_results($wpdb->prepare("select * from $wpdb->linkmeta where link_id = %d and meta_key like '_ssl_network%%' ", $link_id), ARRAY_A);
+		
+		if (count($resultado)>0) :
+		
+			foreach($resultado as $linha):
+				
+				$padrao = '/^_ssl_network\[(.*)\]$/i';
+				preg_match($padrao, $linha['meta_key'], $rede);
+				$rede = $rede[1];
+				$url = $linha['meta_value'];
+				$mid = $linha['meta_id'];
+				
+				$retorno[] = array('network' => $rede, 'url' => $url, 'meta_id' => $mid);
+				
+			endforeach;
+			
+		endif;
+		
+		return $retorno;
+	}
+	
+	public static function add_social_links_to_array() {
+	}
 	
 	
 	public static function js_localize_vars() {
@@ -195,13 +253,17 @@ class simplySocialLinks {
 		$site = $_GET['site'];
 		$url = $_GET['url'];
 		
-		$pre_query = "INSERT INTO $wpdb->linkmeta (`meta_id`, `link_id`, `meta_key`, `meta_value`) VALUES (null, %d, '_ssl_network[$site]', %s) ";
+		// $q = $wpdb->prepare("INSERT INTO $wpdb->linkmeta (`meta_id`, `link_id`, `meta_key`, `meta_value`) VALUES (null, %d, '_ssl_network[$site]', %s) ", $lid, $url);
+		// print_r($q);exit;
+		// $wpdb->query($q);
 		
-		$q = $wpdb->prepare("INSERT INTO $wpdb->linkmeta (`meta_id`, `link_id`, `meta_key`, `meta_value`) VALUES (null, %d, '_ssl_network[$site]', %s) ", $lid, $url);
-		//print_r($q);exit;
-		$wpdb->query($q);
+		$mid = $wpdb->insert($wpdb->linkmeta, array('link_id' => $lid, 'meta_key' => "_ssl_network[$site]", 'meta_value'=> $url ), array( '%d', '%s', '%s' ));
 		
-		echo('{ "sucesso": "S", "mensagem" : "' . __('Link successfully added.','simply-social-links') . '" }');
+		if ($mid === false):
+			echo('{ "sucesso": "N", "mensagem" : "' . __('Failed to add link.','simply-social-links') . '" }');
+		else:
+			echo('{ "sucesso": "S", "mensagem" : "' . __('Link successfully added.','simply-social-links') . '", "link": { "mid": "' . $mid . '"} }');
+		endif;
 		
 		die();
 	}
@@ -252,6 +314,7 @@ class simplySocialLinks {
 		
 		//echo "<pre> $sql"; exit();
 		$wpdb->query($sql);
+		update_option('simplysociallink-options', array('theme' => 'default'));
 	}
 	
 	public static function desinstalar() {
@@ -271,7 +334,7 @@ register_uninstall_hook( __FILE__, array('simplySocialLinks', 'apagar'));
 add_action('init', array('simplySocialLinks','inicializar'));
 add_action('admin_init', array('simplySocialLinks','admin_inicializar'));
 
-
+require_once('bookmark-template-ssl.php');
 
 
 

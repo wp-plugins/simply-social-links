@@ -11,7 +11,13 @@ jQuery(document).ready(function() {
 	
 	jQuery('a.incluir').click(ssl_add_link);
 	
+	if (typeof $.fn.hasAttr != "function") {
+		$.fn.hasAttr = function(name) {
+			return typeof this.attr(name) != "undefined";
+		};
+	}
 	
+
 	
 });
 
@@ -36,16 +42,15 @@ function ssl_add_link() {
 		data: data
 	})
 	.success(function(a) {
-		var botao_apagar = "<a href=\"javascript:void(0);\" class=\"button-secondary hide-if-no-js \" onclick=\"ssl_delete_link(event, '" + link_id + "','{$link->link_id}')\">" + SocialLinks.delete + "</a>"
-		
-		
-		var el = '<dt class="' + site + '"></dt><dd>' + url + '</dd>';
-		
-		var list = jQuery('#ssl_links_list');
-		
-		
-		jQuery('#ssl_links_list').append(el);
-		jQuery('input#ssl_network_url').val('http://');
+		if (a.sucesso=="S") {
+			var botao_apagar = " <a href=\"javascript:void(0);\" class=\"button-secondary hide-if-no-js \" onclick=\"ssl_delete_link(event, '" + a.link.mid + "','" + link_id + "')\">" + SocialLinks.delete + "</a>"
+			var el = '<dt class="' + site + '"></dt><dd>' + url + botao_apagar + '</dd>';
+			jQuery('#ssl_links_list').append(el);
+			jQuery('input#ssl_network_url').val('http://');
+		}
+		else if(a.sucesso=="N") {
+			alert(a.mensagem)
+		}
 		
 	})
 	.error(function(c, d) {
