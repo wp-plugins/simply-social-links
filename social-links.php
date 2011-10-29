@@ -34,7 +34,9 @@ if ($link->link_id):
 			$url = $linha['meta_value'];
 			$mid = $linha['meta_id'];
 			
-			echo "<dt class=\"$rede\"></dt><dd>$url <a href=\"javascript:void(0);\" class=\"button-secondary hide-if-no-js \" onclick=\"ssl_delete_link(event, '$mid','{$link->link_id}')\">" . __('Delete','simply-social-links') . "</a></dd>";
+			echo "<dt class=\"$rede\"></dt><dd>$url"
+			." <a href=\"javascript:void(0);\" class=\"button-secondary hide-if-no-js \" onclick=\"ssl_delete_link(event, '$mid','{$link->link_id}')\">" . __('Delete','simply-social-links') . "</a>"
+			." <a href=\"$url\" target=\"_blank\" class=\"button-secondary hide-if-no-js \">" . __('Visit','simply-social-links') . "</a></dd>";
 			
 		endforeach;
 		

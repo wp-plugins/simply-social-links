@@ -3,7 +3,7 @@
 Plugin Name: Simply Social Links
 Plugin URI: http://maathe.us/blog/simply-social-links
 Description: A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!).
-Version: 0.6
+Version: 0.6.1
 Author: Matheus Eduardo (@matheuseduardo)
 Author URI: http://maathe.us/blog
 Donate URI: http://maathe.us/blog/pague-me-um-cafe
@@ -105,9 +105,12 @@ class simplySocialLinks {
 		$wpdb->tables = array_merge($wpdb->tables, array('linkmeta'));
 		
 		// upgrade jquery version (plugin will be updated until WP load at least 1.5.x version)
-		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js');
-		wp_enqueue_script('jquery');
+		// update: 05/Jun/2011 - wordpress 3.2 (still beta) do this!
+		if (get_bloginfo('version') < "3.2") {;
+			wp_deregister_script( 'jquery' );
+			wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js');
+			wp_enqueue_script('jquery');
+		}
 		
 		load_plugin_textdomain( 'simply-social-links', false, dirname( plugin_basename( __FILE__ )));
 		
@@ -239,6 +242,7 @@ class simplySocialLinks {
 			'list' => __('List','simply-social-links'),
 			'add' => __('Add','simply-social-links'),
 			'delete' => __('Delete','simply-social-links'),
+			'visit' => __('Visit','simply-social-links'),
 			'error' => __('Error','simply-social-links')
 		);
 	}
