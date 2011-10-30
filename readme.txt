@@ -11,7 +11,7 @@ A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flic
 == Description ==
 This plugin adds a new field (metadata) in the section editing links in order to add social networking links (like [twitter](http://twitter.com/), [flickr](http://flickr.com/), etc.) to any link.
 
-=PT-BR=
+PT-BR
 Este plugin acrescenta um novo campo (metadados) na seção de edição de links para poder adicionars links de redes sociais (como [twitter](http://twitter.com/), [flickr](http://flickr.com/), etc) a um link qualquer.
 
 
@@ -52,6 +52,8 @@ Em PT-BR:
 1. Link manager / Gerenciador de Links
  
 == Changelog ==
+= 0.6.2 =
+* Adjustments to translation files. (New translations are welcome. Mail me! Contact me!)
 = 0.6.1 =
 * updated to work with WordPress 3.2+ without bug in post editor screen to insert media.
 = 0.6 =
@@ -60,10 +62,7 @@ Em PT-BR:
 * First Public Release
  
 == Upgrade Notice ==
-[SOON] new update to use with shortcodes in pages, post, etc and better instructions of how to style according to your taste
+= 0.6.2 =
+* Adjustments to translation files. (New translations are welcome. Mail me! Contact me!)
 = 0.6.1 =
 * updated to work with WordPress 3.0+ without bug in post editor screen to insert media.
-= 0.6 =
-* use the function `wp_list_bookmarks_ssl()` (instead of usual `wp_list_bookmarks()`) to get your bookmarks with 'social links' attached
-= 0.5 =
-* First Public Release
