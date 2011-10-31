@@ -4,7 +4,7 @@ Donate link: http://maathe.us/blog/me-paga-um-cafe/
 Tags: simple, links, social, network, 
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 A simple way to add social links (like: facebook, twitter, tumblr, last.fm, flickr, plurk, etc) to your Links (Bookmarks?!).
 
 
